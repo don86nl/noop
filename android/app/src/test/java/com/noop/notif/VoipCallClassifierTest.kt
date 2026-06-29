@@ -18,6 +18,18 @@ class VoipCallClassifierTest {
     }
 
     @Test
+    fun acceptsTeamsCallCategoryViaVoipPath() {
+        val metadata = VoipCallClassifier.Metadata(
+            category = VoipCallClassifier.CATEGORY_CALL,
+            isOngoing = false,
+            isForegroundService = false,
+            isGroupSummary = false,
+        )
+
+        assertTrue(VoipCallClassifier.isIncomingCallNotification("com.microsoft.teams", metadata))
+    }
+
+    @Test
     fun rejectsOngoingKnownPackageCallCategory() {
         val metadata = VoipCallClassifier.Metadata(
             category = VoipCallClassifier.CATEGORY_CALL,
